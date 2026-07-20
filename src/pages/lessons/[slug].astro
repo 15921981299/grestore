@@ -1,0 +1,88 @@
+---
+import GreLayout from '@/layouts/GreLayout.astro';
+import AudioPlayer from '@/components/gre/AudioPlayer.astro';
+import VocabList from '@/components/gre/VocabList.astro';
+import {
+  formatLessonId,
+  getAudioPath,
+  getLessonBySlug,
+  getLessonContent,
+  greLessons,
+  hasLocalAudio,
+} from '@/lib/gre';
+
+export async function getStaticPaths() {
+  return greLessons.map((lesson) => ({
+    params: { slug: lesson.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const lesson = slug ? getLessonBySlug(slug) : undefined;
+
+if (!lesson) {
+  return Astro.redirect('/');
+}
+
+const content = await getLessonContent(lesson.id);
+const pageTitle = `${formatLessonId(lesson.id)} · ${lesson.title}`;
+---
+
+<GreLayout title={pageTitle} description={lesson.titleZh}>
+  <div class="page page--full page--lesson">
+    <header class="page__head">
+      <a href="/" class="lesson-back">
+        <svg class="lesson-back__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M15 18l-6-6 6-6"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <span>返回目录</span>
+      </a>
+      <p class="lesson-id">Lesson {formatLessonId(lesson.id)}</p>
+      <h1>{lesson.title}</h1>
+      <p class="page__subtitle">{lesson.titleZh}</p>
+    </header>
+
+    <div class="lesson-stack">
+      <AudioPlayer
+        src={getAudioPath(lesson.id)}
+        title={lesson.title}
+        available={hasLocalAudio(lesson.id)}
+      />
+
+      {
+        content ? (
+          <>
+            <section class="story gre-card">
+              <h2 class="gre-section-title">English Story</h2>
+              <div class="prose-gre prose-gre--en">
+                {content.storyEn.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
+            </section>
+
+            <section class="story gre-card">
+              <h2 class="gre-section-title">中文译文</h2>
+              <div class="prose-gre prose-gre--zh">
+                {content.storyZh.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
+            </section>
+
+            {
+              content.vocabulary && content.vocabulary.length > 0 && (
+                <VocabList entries={content.vocabulary} />
+              )
+            }
+          </>
+        ) : (
+          <section class="story gre-card">
+            <p class="story__empty">该课课文内容暂未导入。</p>
+          </section>
+        )
+      }
+    </div>
+  </div>
+</GreLayout>

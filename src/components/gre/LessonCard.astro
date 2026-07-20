@@ -1,0 +1,73 @@
+---
+import type { GreLesson } from '@/lib/gre';
+import { formatLessonId, lessonHref } from '@/lib/gre';
+
+interface Props {
+  lesson: GreLesson;
+}
+
+const { lesson } = Astro.props;
+---
+
+<a href={lessonHref(lesson)} class="lesson-card">
+  <span class="lesson-card__id">{formatLessonId(lesson.id)}</span>
+  <div class="lesson-card__body">
+    <h3 class="lesson-card__title">{lesson.title}</h3>
+    <p class="lesson-card__zh">{lesson.titleZh}</p>
+  </div>
+</a>
+
+<style>
+  .lesson-card {
+    display: flex;
+    gap: var(--space-gap);
+    align-items: flex-start;
+    padding: 0.9375rem 1.125rem;
+    background: var(--gre-surface);
+    border: 1px solid var(--gre-border);
+    border-radius: var(--radius);
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 180ms ease-out, background-color 180ms ease-out;
+  }
+
+  .lesson-card:hover {
+    border-color: var(--gre-border-strong);
+    background: #ffffff;
+  }
+
+  .lesson-card:focus-visible {
+    outline: 2px solid var(--gre-accent);
+    outline-offset: 2px;
+  }
+
+  .lesson-card__id {
+    flex-shrink: 0;
+    min-width: 2.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    color: var(--gre-muted-light);
+  }
+
+  .lesson-card__title {
+    margin: 0 0 0.3125rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--gre-text);
+  }
+
+  .lesson-card__zh {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: var(--gre-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

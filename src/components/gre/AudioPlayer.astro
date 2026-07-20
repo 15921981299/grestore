@@ -1,0 +1,70 @@
+---
+interface Props {
+  src: string;
+  title: string;
+  available?: boolean;
+}
+
+const { src, title, available = true } = Astro.props;
+---
+
+<div class="audio-player gre-card">
+  <div class="audio-player__head">
+    <span class="gre-badge">MP3 跟读</span>
+    <p class="audio-player__title">{title}</p>
+  </div>
+  {
+    available ? (
+      <div class="audio-player__body">
+        <audio controls preload="none" class="audio-player__el">
+          <source src={src} type="audio/mpeg" />
+          您的浏览器不支持音频播放。
+        </audio>
+      </div>
+    ) : (
+      <p class="audio-player__empty">暂无音频文件，请将 MP3 放入 public/audio/ 后刷新。</p>
+    )
+  }
+</div>
+
+<style>
+  .audio-player__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-gap);
+    margin-bottom: var(--space-gap);
+    flex-wrap: wrap;
+  }
+
+  .audio-player__title {
+    margin: 0;
+    min-width: 0;
+    color: var(--gre-muted);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .audio-player__body {
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--gre-border);
+    border-radius: var(--radius);
+    background: var(--gre-bg);
+  }
+
+  .audio-player__el {
+    display: block;
+    width: 100%;
+    height: 2.25rem;
+  }
+
+  .audio-player__empty {
+    margin: 0;
+    padding: 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--gre-muted);
+    background: var(--gre-bg);
+    border: 1px dashed var(--gre-border);
+    border-radius: var(--radius);
+  }
+</style>

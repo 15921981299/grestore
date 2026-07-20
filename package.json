@@ -1,0 +1,20 @@
+{
+  "name": "cux-theme",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "gre:build-data": "python scripts/build-gre-data.py",
+    "import:gre-content": "python scripts/import-gre-content.py",
+    "download:gre-audio": "python scripts/download-gre-audio.py"
+  },
+  "dependencies": {
+    "astro": "^5.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,0 +1,300 @@
+:root {
+  --gre-bg: #fafafa;
+  --gre-surface: #ffffff;
+  --gre-card: #ffffff;
+  --gre-border: rgba(15, 23, 42, 0.07);
+  --gre-border-strong: rgba(15, 23, 42, 0.12);
+  --gre-text: #0f172a;
+  --gre-muted: #64748b;
+  --gre-muted-light: #94a3b8;
+  --gre-accent: #0f766e;
+  --gre-accent-soft: rgba(15, 118, 110, 0.08);
+  --gre-accent-text: #0f766e;
+  --gre-shadow-sm: none;
+  --font-sans: cursive;
+  --font-display: cursive;
+  --max-width: none;
+  --radius: 0.625rem;
+  --radius-lg: 0.75rem;
+  --space-inline: clamp(1rem, 4vw, 2.5rem);
+  --space-block: clamp(1.25rem, 3vw, 1.75rem);
+  --space-block-lg: clamp(6.75rem, 4vw, 2.5rem);
+  --space-gap: clamp(0.625rem, 1.2vw, 0.875rem);
+  --space-gap-lg: clamp(1rem, 2vw, 1.5rem);
+  --space-card: clamp(1.125rem, 2.5vw, 1.625rem);
+  --space-prose: 1rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: cursive;
+  line-height: 1.6;
+  color: var(--gre-text);
+  background: var(--gre-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--gre-bg);
+}
+
+a {
+  color: var(--gre-accent-text);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #115e59;
+}
+
+.container {
+  width: 100%;
+  padding-inline: var(--space-inline);
+}
+
+.page--full {
+  width: 100%;
+  padding-inline: var(--space-inline);
+  padding-block: var(--space-block-lg);
+}
+
+main {
+  padding-bottom: 0;
+}
+
+.gre-header {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 20;
+  margin: 0.75rem var(--space-inline) 0;
+  border: 1px solid var(--gre-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.gre-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-gap-lg);
+  padding-block: 0.6875rem;
+}
+
+.gre-header .gre-header__inner {
+  padding-inline: 1rem;
+}
+
+.gre-header__brand {
+  flex-shrink: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--gre-text);
+  transition: color 180ms ease-out;
+}
+
+.gre-header__quote {
+  margin: 0;
+  min-width: 0;
+  font-size: 0.6125rem;
+  line-height: 1.5;
+  color: var(--gre-muted);
+}
+
+.gre-header__quote-author {
+  margin-left: 0.375rem;
+  color: var(--gre-muted-light);
+  white-space: nowrap;
+}
+
+.gre-header__brand:hover {
+  color: var(--gre-muted);
+}
+
+.gre-header__brand:focus-visible {
+  outline: 2px solid var(--gre-accent);
+  outline-offset: 2px;
+}
+
+.gre-card {
+  background: var(--gre-card);
+  border: 1px solid var(--gre-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-card);
+}
+
+.gre-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 var(--space-gap-lg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gre-muted);
+}
+
+.gre-section-title::before {
+  content: '';
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1px;
+  background: var(--gre-accent);
+}
+
+.gre-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gre-muted-light);
+}
+
+.page--lesson {
+  padding-top: var(--space-block);
+}
+
+.page__head {
+  margin-bottom: var(--space-gap-lg);
+  padding-bottom: var(--space-gap-lg);
+  border-bottom: 1px solid var(--gre-border);
+}
+
+.page__head h1 {
+  margin: 0 0 0.375rem;
+  font-size: clamp(1.375rem, 3.5vw, 1.875rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.page__head .page__subtitle {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gre-muted);
+}
+
+.lesson-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3125rem;
+  margin-bottom: var(--space-gap-lg);
+  padding: 0.4375rem 0.8125rem 0.4375rem 0.625rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--gre-muted);
+  background: var(--gre-surface);
+  border: 1px solid var(--gre-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    color 180ms ease-out,
+    background-color 180ms ease-out,
+    border-color 180ms ease-out;
+}
+
+.lesson-back__icon {
+  flex-shrink: 0;
+  transition: transform 180ms ease-out;
+}
+
+.lesson-back:hover {
+  color: var(--gre-accent-text);
+  background: var(--gre-accent-soft);
+  border-color: rgba(15, 118, 110, 0.2);
+}
+
+.lesson-back:hover .lesson-back__icon {
+  transform: translateX(-2px);
+}
+
+.lesson-back:focus-visible {
+  outline: 2px solid var(--gre-accent);
+  outline-offset: 2px;
+}
+
+.lesson-id {
+  margin: 0 0 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gre-accent-text);
+}
+
+.lesson-stack {
+  display: grid;
+  gap: var(--space-gap-lg);
+}
+
+.prose-gre p {
+  margin: 0 0 var(--space-prose);
+  font-size: 0.9375rem;
+  line-height: 1.85;
+  color: #334155;
+}
+
+.prose-gre p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-gre--en p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #1e293b;
+}
+
+.prose-gre--zh p {
+  color: #475569;
+}
+
+.story__empty {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--gre-muted);
+}
+
+@media (max-width: 768px) {
+  .gre-header {
+    top: 0;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+
+  .gre-header__inner {
+    flex-wrap: wrap;
+    padding-block: 0.75rem;
+    padding-inline: var(--space-inline);
+    gap: 0.375rem var(--space-gap);
+  }
+
+  .gre-header__quote {
+    font-size: 0.75rem;
+  }
+
+  .page--full {
+    padding-block: var(--space-block);
+  }
+
+  .page--lesson {
+    padding-top: var(--space-gap-lg);
+  }
+}

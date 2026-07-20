@@ -1,0 +1,90 @@
+---
+import GreLayout from '@/layouts/GreLayout.astro';
+import LessonCard from '@/components/gre/LessonCard.astro';
+import PenBanner from '@/components/gre/PenBanner.astro';
+import { greLessons } from '@/lib/gre';
+import { site } from '@/config/site';
+---
+
+<GreLayout title={site.title} description={site.description}>
+  <section class="home-hero">
+    <div class="home-hero__inner">
+      <PenBanner class="home-hero__pen" />
+      <p class="home-hero__desc">{site.description}</p>
+    </div>
+  </section>
+
+  <div class="page page--full">
+    <div class="catalog">
+      {greLessons.map((lesson) => <LessonCard lesson={lesson} />)}
+    </div>
+  </div>
+</GreLayout>
+
+<style>
+  .home-hero {
+    width: 100%;
+    padding: var(--space-block-lg) var(--space-inline) var(--space-block);
+  }
+
+  .home-hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: 0;
+    gap: var(--space-gap);
+  }
+
+  .home-hero__pen {
+    width: 100%;
+    margin: 0;
+  }
+
+  .home-hero__desc {
+    margin: 0;
+    max-width: 28rem;
+    color: var(--gre-muted);
+    line-height: 1.7;
+    font-size: 0.675rem;
+  }
+
+  .catalog {
+    display: grid;
+    gap: var(--space-gap);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .catalog {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .catalog {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .catalog {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .catalog {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .catalog {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+</style>
