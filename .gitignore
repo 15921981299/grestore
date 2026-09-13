@@ -7,7 +7,7 @@ dist/
 .tmp-gre-audio/
 
 # large local GRE audio (keep manifest.json)
-public/audio/*.mp3
+# public/audio/*.mp3
 
 # env
 .env
